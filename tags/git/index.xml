@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on o0原的博客</title>
+    <link>/tags/git/</link>
+    <description>Recent content in Git on o0原的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 01 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git 常用命令</title>
+      <link>/post/git/</link>
+      <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/git/</guid>
+      <description>设置本机邮箱与名字 git config --global user.email &amp;quot;you@example.com&amp;quot; git config --global user.email &amp;quot;you@example.com&amp;quot; 常用命令 git clone git add 命令可将该文件添加到缓存 git status 查看当前状态 git diff 命令显示已写入缓存与已修改但尚未写入缓存的</description>
+    </item>
+    
+  </channel>
+</rss>

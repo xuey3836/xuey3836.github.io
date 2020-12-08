@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on o0原的博客</title>
+    <link>/tags/r/</link>
+    <description>Recent content in R on o0原的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 17 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SparkR</title>
+      <link>/post/sparkr/</link>
+      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/sparkr/</guid>
+      <description>安装sparkR install.packages(&amp;#39;SparkR&amp;#39;) library(SparkR) 或者安装过spark后 if (nchar(Sys.getenv(&amp;quot;SPARK_HOME&amp;quot;)) &amp;lt; 1) { Sys.setenv(SPARK_HOME = &amp;quot;/home/spark&amp;quot;) } library(SparkR, lib.loc = c(file.path(Sys.getenv(&amp;quot;SPARK_HOME&amp;quot;), &amp;quot;R&amp;quot;, &amp;quot;lib&amp;quot;))) 启动spark sparkR.session(master = &amp;quot;local[*]&amp;quot;, sparkConfig = list(spark.driver.memory = &amp;quot;2g&amp;quot;)) 创建SparkDataFrame 有了S</description>
+    </item>
+    
+    <item>
+      <title>R 问题汇总</title>
+      <link>/post/rquestion/</link>
+      <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/rquestion/</guid>
+      <description>R 与C, C++, Rcpp 1. Rtools does not work outside default directory (Windows) 参考, 需要在R中更改Rtool的默认目录。 added the following lines to my global .Rprofile file: Sys.setenv(PATH = paste(&amp;quot;C:/Rtools/bin&amp;quot;, Sys.getenv(&amp;quot;PATH&amp;quot;), sep=&amp;quot;;&amp;quot;)) Sys.setenv(BINPREF = &amp;quot;C:/Rtools/mingw_$(WIN)/bin/&amp;quot; .Rprofile 文件 在每次R 启动的时候，会加载一</description>
+    </item>
+    
+  </channel>
+</rss>

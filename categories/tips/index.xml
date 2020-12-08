@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tips on o0原的博客</title>
+    <link>/categories/tips/</link>
+    <description>Recent content in Tips on o0原的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Latex 常用命令</title>
+      <link>/post/latextips/</link>
+      <pubDate>Tue, 22 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/latextips/</guid>
+      <description>常用命令 长的的hat $\widehat{mFDR}$</description>
+    </item>
+    
+    <item>
+      <title>Linux 常用命令</title>
+      <link>/post/linux/</link>
+      <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/linux/</guid>
+      <description>常用命令 重命名文件 mv A B ###复制文件及文件夹 复制文件 cp /home/o0/1.txt /home/o0/2.txt 复制文件夹 cp -R test /file</description>
+    </item>
+    
+    <item>
+      <title>快捷键及常用操作</title>
+      <link>/post/thinkpad-hot-key/</link>
+      <pubDate>Wed, 05 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/thinkpad-hot-key/</guid>
+      <description>常用快捷键 chorm 常用快捷键 windown 快捷键 thinkpad 开键盘灯： 按住FN键,点击空格键即可开启。 查看已连接wifi密码 参考链接 - 启动cmd - netsh wlan show profiles - netsh wlan show profile name =&amp;ldquo;&amp;rdquo;</description>
+    </item>
+    
+    <item>
+      <title>Sublime Text 3</title>
+      <link>/post/sublime-text-3/</link>
+      <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/sublime-text-3/</guid>
+      <description>常用快捷键 Ctrl+G：跳转到第几行 Ctrl+L：选择行，重复可依次增加选择下一行 Ctrl+H：替换 Ctrl+N：新建窗口 Ctrl+D 选中光标所占的文</description>
+    </item>
+    
+  </channel>
+</rss>

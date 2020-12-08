@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Life on o0原的博客</title>
+    <link>/categories/life/</link>
+    <description>Recent content in Life on o0原的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 Sep 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/life/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Life in UCAS</title>
+      <link>/post/life-in-ucas/</link>
+      <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/life-in-ucas/</guid>
+      <description>新的生活新的开始 今天是2019年的9月15日，准备重新记录自己的生活以及所学，希望这样的一个积累，让自己有所进步</description>
+    </item>
+    
+    <item>
+      <title>New Haven</title>
+      <link>/post/new-haven/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/new-haven/</guid>
+      <description>Dec 1, 2018 I got up late today, it is about 9 am, and I play my phone and search the internet for about half an hour before I got up. It is a bad habit, I must aviod it tommorrow.
+After eating breakfast, I came to the school of management for studing.
+I gone back to my home at abot 12pm, and after eating lunch, I have a break for about half an hour, then I go to the som again and stay until half past 4pm.</description>
+    </item>
+    
+  </channel>
+</rss>

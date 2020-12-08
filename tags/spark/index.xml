@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spark on o0原的博客</title>
+    <link>/tags/spark/</link>
+    <description>Recent content in Spark on o0原的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 28 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/spark/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pyspark.sql DataFrame创建, 常用操作以及输出到文件</title>
+      <link>/post/pyspark-sql-dataframe/</link>
+      <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/pyspark-sql-dataframe/</guid>
+      <description>Spark SQL 简介及参考链接 Spark 是一个基于内存的用于处理大数据的集群计算框架。它提供了一套简单的编程接口，从而使得应用程序开发者方便使用集群节点的CPU</description>
+    </item>
+    
+    <item>
+      <title>SparkR</title>
+      <link>/post/sparkr/</link>
+      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/sparkr/</guid>
+      <description>安装sparkR install.packages(&amp;#39;SparkR&amp;#39;) library(SparkR) 或者安装过spark后 if (nchar(Sys.getenv(&amp;quot;SPARK_HOME&amp;quot;)) &amp;lt; 1) { Sys.setenv(SPARK_HOME = &amp;quot;/home/spark&amp;quot;) } library(SparkR, lib.loc = c(file.path(Sys.getenv(&amp;quot;SPARK_HOME&amp;quot;), &amp;quot;R&amp;quot;, &amp;quot;lib&amp;quot;))) 启动spark sparkR.session(master = &amp;quot;local[*]&amp;quot;, sparkConfig = list(spark.driver.memory = &amp;quot;2g&amp;quot;)) 创建SparkDataFrame 有了S</description>
+    </item>
+    
+    <item>
+      <title>Install Spark on win 10 with python</title>
+      <link>/post/install-spark-on-win-10-with-python/</link>
+      <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/install-spark-on-win-10-with-python/</guid>
+      <description>软件版本 python 3.6.8 下载网址 java 1.8.0_221 下载网址 spark-2.4.4-bin-hadoop2.7.tgz 下载网址 hadoop 2.7.6 下载网址 winutils.exe (windows 需要) 下载网址 环境变量配置 系统变量添加 JAVA_HOME： C:\Program Files\Java\jdk1.8.0_221 HADOOP_HOME:C:\spark\hadoop-2.7.6 SPARK_HOME: C:\spark\spark-2.4.4-bin-hadoop2. Path 中添加 (Python 安装</description>
+    </item>
+    
+  </channel>
+</rss>

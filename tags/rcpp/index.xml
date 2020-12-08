@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rcpp on o0原的博客</title>
+    <link>/tags/rcpp/</link>
+    <description>Recent content in Rcpp on o0原的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/rcpp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rcpp and RcppArmaillo usefull tips</title>
+      <link>/post/rcpp-and-rcpparmaillo-usefull-tips/</link>
+      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/rcpp-and-rcpparmaillo-usefull-tips/</guid>
+      <description>Rcpp The Rcpp package provides C++ classes that greatly facilitate interfacing C or C++ code in R packages using the .Call() interface provided by R. The website of the author: Dirk Eddelbuettela Configuration: Install C++ compiler For windows user, Install Rtools. Reference Some useful reference Rcpp for everyone Rcpp website Adanced R, High performance functions with Rcpp Using Rcpp with Rstudio Learing Rcpp Some quick reference guide Rcpp Quick Reference</description>
+    </item>
+    
+  </channel>
+</rss>

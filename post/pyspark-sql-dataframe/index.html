@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="o0原的博客">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/IMG_3425.jpg">
+    <meta property="twitter:image" content="//img/IMG_3425.jpg" />
+    
+
+    
+    <meta name="title" content="Pyspark.sql DataFrame创建, 常用操作以及输出到文件" />
+    <meta property="og:title" content="Pyspark.sql DataFrame创建, 常用操作以及输出到文件" />
+    <meta property="twitter:title" content="Pyspark.sql DataFrame创建, 常用操作以及输出到文件" />
+    
+
+    
+    <meta name="description" content="o0原，程序员, 开源爱好者，生活探险家 | 这里是 o0原 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="o0原，程序员, 开源爱好者，生活探险家 | 这里是 o0原 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="o0原，程序员, 开源爱好者，生活探险家 | 这里是 o0原 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="o0原, xueyuan, Xueyuan, , o0原的网络日志, o0原的博客, Xueyuan Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Pyspark.sql DataFrame创建, 常用操作以及输出到文件-o0原的博客 | yuan Blog</title>
+
+    <link rel="canonical" href="/post/pyspark-sql-dataframe/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">o0原的博客</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/life">Life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tech">Tech</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tips">Tips</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/IMG_3425.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/spark" title="Spark">
+                            Spark
+                        </a>
+                        
+                        <a class="tag" href="/tags/python" title="Python">
+                            Python
+                        </a>
+                        
+                    </div>
+                    <h1>Pyspark.sql DataFrame创建, 常用操作以及输出到文件</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                                o0原的博客
+                         
+                        on 
+                        Thursday, November 28, 2019
+                        
+                            <span id="/post/pyspark-sql-dataframe/" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#spark-sql-简介及参考链接">Spark SQL 简介及参考链接</a></li>
+</ul></li>
+<li><a href="#pyspark-sql-核心类">pyspark.sql 核心类</a>
+<ul>
+<li><a href="#环境配置">环境配置</a></li>
+<li><a href="#从sparksession-开始">从SparkSession 开始</a></li>
+<li><a href="#创建dataframe">创建DataFrame</a></li>
+<li><a href="#dataframe常用方法">DataFrame常用方法</a>
+<ul>
+<li><a href="#创建dataframe-customers-products-sales">创建DataFrame, customers, products, sales</a></li>
+<li><a href="#基本操作">基本操作</a></li>
+<li><a href="#执行操作actions">执行操作actions</a></li>
+<li><a href="#转换-查询常用方法-合并-抽样-聚合-分组聚合-子集选取">转换：查询常用方法，合并，抽样，聚合，分组聚合，子集选取</a>
+<ul>
+<li><a href="#返回一个有新名的dataframe">返回一个有新名的DataFrame</a></li>
+<li><a href="#聚合操作-agg-一列或多列上执行指定的聚合操作-返回一个新的dataframe">聚合操作. agg: 一列或多列上执行指定的聚合操作，返回一个新的DataFrame</a></li>
+<li><a href="#访问列">访问列</a></li>
+<li><a href="#去重-删除列">去重，删除列</a></li>
+<li><a href="#行筛选和列选择">行筛选和列选择</a></li>
+<li><a href="#增加列-替换列">增加列，替换列</a></li>
+<li><a href="#分组groupby">分组groupby</a></li>
+<li><a href="#替换replace">替换replace</a></li>
+<li><a href="#缺失值处理-参数pandas-dataframe类似">缺失值处理(参数pandas.DataFrame类似)</a></li>
+<li><a href="#遍历循环">遍历循环</a></li>
+<li><a href="#合并">合并</a></li>
+<li><a href="#排序">排序</a></li>
+<li><a href="#抽样与分割">抽样与分割</a></li>
+<li><a href="#转化成其他常用数据对象-json-df-pandas-df">转化成其他常用数据对象， Json, DF, pandas.DF</a></li>
+<li><a href="#生成临时查询表">生成临时查询表</a></li>
+<li><a href="#其他函数-crossjion-crosstab-cube-rollup">其他函数 crossJion, crosstab, cube, rollup</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#输出write-保存dataframe到文件中">输出write，保存DataFrame到文件中</a></li>
+</ul></li>
+</ul>
+</nav>
+                
+                
+
+<h2 id="spark-sql-简介及参考链接">Spark SQL 简介及参考链接</h2>
+
+<p>Spark 是一个基于内存的用于处理大数据的集群计算框架。它提供了一套简单的编程接口，从而使得应用程序开发者方便使用集群节点的CPU，内存，存储资源来处理大数据。</p>
+
+<p>Spark API提供了Scala, Java, Python和R的编程接口，可以使用这些语言来开发Spark应用。为了用Spark支持Python，Apache Spark社区发布了一个工具PySpark。使用PySpark，您也可以使用Python编程语言处理RDD。</p>
+
+<p>Spark SQL将 SQL和HiveSQL的简单与强大融合到一起。 Spark SQL是一个运行在Spark上的Spark库。它提供了比Spark Core更为高层的用于处理结构化数据的抽象.</p>
+
+<p>Spark DataFrame 派生于RDD类，分布式但是提供了非常强大的数据操作功能。 本文主要梳理Spark DataFrame的常用方法，之后写一下与DataFrame操作密切配合的Spark SQL内置函数
+和 用户UDF (用户定义函数) 和 UDAF (用户定义聚合函数)</p>
+
+<ul>
+<li><a href="https://spark.apache.org/docs/latest/sql-programming-guide.html">Spark-sql_programming-guide</a></li>
+<li><a href="https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame">pyspark.sql API</a></li>
+<li>Big Data Analysis with Spark, Mohammed Guller</li>
+</ul>
+
+<h1 id="pyspark-sql-核心类">pyspark.sql 核心类</h1>
+
+<ul>
+<li>pyspark.SparkContext: Spark 库的主要入口点，它表示与Spark集群的一个连接，其他重要的对象都要依赖它.SparkContext存在于Driver中，是Spark功能的主要入口。
+代表着与Spark集群的连接，可以在集群上创建RDD，accumulators和广播变量</li>
+<li>pyspark.RDD: 是Spark的主要数据抽象概念，是Spark库中定义的一个抽象类。</li>
+<li>pyspark.streaming.StreamingContext 一个定义在Spark Streaming库中定义的类, 每一个Spark Streaming 应用都必须创建这个类</li>
+<li>pyspark.streaming.DStrem：离散数据流，是Spark Streaming处理数据流的主要对象</li>
+<li>pyspark.sql.SparkSession: 是DataFrame和SQL函数的主要入口点。</li>
+<li>pyspark.sql.DataFrame: 是Spark SQL的主要抽象对象，若干行的分布式数据，每一行都要若干个有名字的列。 跟R/Python中的DataFrame 相像
+,有着更丰富的优化。DataFrame可以有很多种方式进行构造，例如： 结构化数据文件，Hive的table, 外部数据库，RDD。</li>
+<li>pyspark.sql.Column DataFrame 的列表达.</li>
+<li>pyspark.sql.Row DataFrame的行数据</li>
+</ul>
+
+<h2 id="环境配置">环境配置</h2>
+
+<ul>
+<li>os: Win 10</li>
+<li>spark: spark-2.4.4-bin-hadoop2.7</li>
+<li>python：python 3.7.4</li>
+<li>java: jdk 1.8.0_221</li>
+</ul>
+
+<h2 id="从sparksession-开始">从SparkSession 开始</h2>
+
+<p>Spark 2.20 以后 SparkSession 合并了 SQLContext 和 HiveContext, 同时支持Hive, 包括HIveSOL, Hive UDFs 的入口， 以及从Hive table中读取数据。</p>
+
+<pre><code>from pyspark.sql import SparkSession
+
+spark = SparkSession \
+    .builder \
+    .appName(&quot;Python Spark SQL basic example&quot;) \
+    .config(&quot;spark.some.config.option&quot;, &quot;some-value&quot;) \
+    .getOrCreate() 
+    ## 获取或者新建一个 sparkSession
+    #spark master URL. 本地为local, “local[4]” 本地4核,
+    # or “spark://master:7077” to run on a Spark standalone cluster
+</code></pre>
+
+<h2 id="创建dataframe">创建DataFrame</h2>
+
+<p>有了SparkSession, DataFrame可以从已有的RDD, Hive table, 或者其他spark的数据源进行创建</p>
+
+<pre><code># spark is an existing SparkSession
+# 从文件读取
+# 工作目录： spark安装路径SPARK_HOME
+## read.json
+df = spark.read.json(&quot;examples/src/main/resources/people.json&quot;)
+df.show()
++----+-------+
+| age|   name|
++----+-------+
+|null|Michael|
+|  30|   Andy|
+|  19| Justin|
++----+-------+
+df = spark.read.load(&quot;examples/src/main/resources/people.json&quot;, format=&quot;json&quot;) #format: Default to ‘parquet’
+## read.csv
+df_csv = spark.read.csv(&quot;examples/src/main/resources/people.csv&quot;,sep=';', header= True)
+## read.text
+df_txt = spark.read.text(&quot;examples/src/main/resources/people.txt&quot;)
+## read.parquet
+df_parquet = spark.read.parquet(&quot;examples/src/main/resources/users.parquet&quot;)
+## orc
+df_orc = spark.read.orc(&quot;examples/src/main/resources/users.orc&quot;)
+## rdd
+sc = spark.sparkContext
+rdd = sc.textFile('examples/src/main/resources/people.json')
+df_rdd1 = spark.read.json(rdd)
+
+# createDataFrame: rdd, list, pandas.DataFrame
+df_list = spark.createDataFrame([('Tom', 80), ('Alice', None)], [&quot;name&quot;, &quot;height&quot;])
+l = [('Alice', 1)]
+rdd = sc.parallelize(l)
+df_rdd2 = spark.createDataFrame(rdd,['name', 'age'])
+df_rdd2.show()
++-----+---+
+| name|age|
++-----+---+
+|Alice|  1|
++-----+---+
+## with scheme 
+from pyspark.sql.types import *
+schema = StructType([
+    StructField(&quot;name&quot;, StringType(), True), 
+    StructField(&quot;age&quot;, IntegerType(), True)])
+df3 = spark.createDataFrame(rdd, schema)
+#from pandas
+import pandas
+df_pandas = spark.createDataFrame(pandas.DataFrame([[1, 2]]))
+df_pandas.show()
++---+---+
+|  0|  1|
++---+---+
+|  1|  2|
++---+---+
+</code></pre>
+
+<h2 id="dataframe常用方法">DataFrame常用方法</h2>
+
+<p>关于DataFrame的操作，感觉上和pandas.DataFrame的操作很类似，很多时候都可以触类旁通。</p>
+
+<p>Spark 的操作分为两部分， 转换（transformation） 和 执行（actions）. 操作是lazy模式，只有遇到执行操作才会执行</p>
+
+<h3 id="创建dataframe-customers-products-sales">创建DataFrame, customers, products, sales</h3>
+
+<pre><code>customers =  [(1,'James',21,'M'), (2, &quot;Liz&quot;,25,&quot;F&quot;), (3, &quot;John&quot;, 31, &quot;M&quot;),\
+     (4, &quot;Jennifer&quot;, 45, &quot;F&quot;), (5, &quot;Robert&quot;, 41, &quot;M&quot;), (6, &quot;Sandra&quot;, 45, &quot;F&quot;)]
+df_customers = spark.createDataFrame(customers, [&quot;cID&quot;, &quot;name&quot;, &quot;age&quot;, &quot;gender&quot;]) # list -&gt; DF
+df_customers.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  1|   James| 21|     M|
+|  2|     Liz| 25|     F|
+|  3|    John| 31|     M|
+|  4|Jennifer| 45|     F|
+|  5|  Robert| 41|     M|
+|  6|  Sandra| 45|     F|
++---+--------+---+------+
+
+products = [(1, &quot;iPhone&quot;, 600, 400), (2, &quot;Galaxy&quot;, 500, 400), (3, &quot;iPad&quot;, 400, 300),\
+            (4, &quot;Kindel&quot;,200,100), (5, &quot;MacBook&quot;, 1200, 900), (6, &quot;Dell&quot;,500, 400)]
+df_products = sc.parallelize(products).toDF([&quot;pId&quot;, &quot;name&quot;, &quot;price&quot;, &quot;cost&quot;]) # List-&gt; RDD -&gt;DF
+df_products.show()
++---+-------+-----+----+
+|pId|   name|price|cost|
++---+-------+-----+----+
+|  1| iPhone|  600| 400|
+|  2| Galaxy|  500| 400|
+|  3|   iPad|  400| 300|
+|  4| Kindel|  200| 100|
+|  5|MacBook| 1200| 900|
+|  6|   Dell|  500| 400|
++---+-------+-----+----+
+
+sales = [(&quot;01/01/2015&quot;, &quot;iPhone&quot;, &quot;USA&quot;, 40000), (&quot;01/02/2015&quot;, &quot;iPhone&quot;, &quot;USA&quot;, 30000),\
+        (&quot;01/02/2015&quot;, &quot;iPhone&quot;, &quot;China&quot;, 10000), (&quot;01/02/2015&quot;, &quot;iPhone&quot;, &quot;China&quot;, 5000),\
+        (&quot;01/01/2015&quot;, &quot;S6&quot;, &quot;USA&quot;, 20000), (&quot;01/02/2015&quot;, &quot;S6&quot;, &quot;USA&quot;, 10000),\
+        (&quot;01/01/2015&quot;, &quot;S6&quot;, &quot;China&quot;, 9000), (&quot;01/02/2015&quot;, &quot;S6&quot;, &quot;China&quot;, 6000)]
+df_sales = spark.createDataFrame(sales, [&quot;date&quot;, &quot;product&quot;, &quot;country&quot;, &quot;revenue&quot;])
+df_sales.show()
++----------+-------+-------+-------+
+|      date|product|country|revenue|
++----------+-------+-------+-------+
+|01/01/2015| iPhone|    USA|  40000|
+|01/02/2015| iPhone|    USA|  30000|
+|01/02/2015| iPhone|  China|  10000|
+|01/02/2015| iPhone|  China|   5000|
+|01/01/2015|     S6|    USA|  20000|
+|01/02/2015|     S6|    USA|  10000|
+|01/01/2015|     S6|  China|   9000|
+|01/02/2015|     S6|  China|   6000|
++----------+-------+-------+-------+
+
+</code></pre>
+
+<h3 id="基本操作">基本操作</h3>
+
+<pre><code>df_customers.cache() # 以列式存储在内存中
+df_customers.persist() # 缓存到内存中
+df_customers.unpersist() # 移除所有的blocks
+df_customers.coalesce(numPartitions= 1) #返回一个有着numPartition的DataFrame
+df_customers.repartition(10) ##repartitonByRange
+df_customers.rdd.getNumPartitions()# 查看partitons个数
+df_customers.columns # 查看列名
+['cID', 'name', 'age', 'gender']
+
+df_customers.dtypes # 返回列的数据类型
+df_customers.explain() #返回物理计划，调试时应用
+
+</code></pre>
+
+<h3 id="执行操作actions">执行操作actions</h3>
+
+<pre><code>df_customers.show(n = 2, truncate= True, vertical= False) #n是行数，truncate字符限制长度。
++---+-----+---+------+
+|cID| name|age|gender|
++---+-----+---+------+
+|  1|James| 21|     M|
+|  2|  Liz| 25|     F|
++---+-----+---+------+
+only showing top 2 rows
+
+df_customers.collect() # 返回所有记录的列表， 每一个元素是Row对象
+[Row(cID=1, name='James', age=21, gender='M'), Row(cID=2, name='Liz', age=25, gender='F'), 
+Row(cID=3, name='John', age=31, gender='M'), Row(cID=4, name='Jennifer', age=45, gender='F'),
+Row(cID=5, name='Robert', age=41, gender='M'), Row(cID=6, name='Sandra', age=45, gender='F')]
+
+df_customers.count() # 有多少行, 
+6
+
+df_customers.head(n=1) #df_customers.limit(), 返回前多少行； 当结果比较小的时候使用
+[Row(cID=1, name='James', age=21, gender='M')]
+
+df_customers.describe() # 探索性数据分析
+df_customers.first() # 返回第一行
+Row(cID=1, name='James', age=21, gender='M')
+
+df_customers.take(2) #以Row对象的形式返回DataFrame的前几行
+[Row(cID=1, name='James', age=21, gender='M'), Row(cID=2, name='Liz', age=25, gender='F')]
+
+df_customers.printSchema() # 以树的格式输出到控制台
+root
+ |-- cID: long (nullable = true)
+ |-- name: string (nullable = true)
+ |-- age: long (nullable = true)
+ |-- gender: string (nullable = true)
+ 
+df_customers.corr('cID', &quot;age&quot;) # df_customers.cov('cID', 'age') 计算两列的相关系数
+0.9298147235977954
+</code></pre>
+
+<h3 id="转换-查询常用方法-合并-抽样-聚合-分组聚合-子集选取">转换：查询常用方法，合并，抽样，聚合，分组聚合，子集选取</h3>
+
+<h4 id="返回一个有新名的dataframe">返回一个有新名的DataFrame</h4>
+
+<pre><code>df_as1 = df_customers.alias(&quot;df_as1&quot;)
+df_as1.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  1|   James| 21|     M|
+|  2|     Liz| 25|     F|
+|  3|    John| 31|     M|
+|  4|Jennifer| 45|     F|
+|  5|  Robert| 41|     M|
+|  6|  Sandra| 45|     F|
++---+--------+---+------+
+df_as2 = df_customers.alias(&quot;df_as2&quot;)
+</code></pre>
+
+<h4 id="聚合操作-agg-一列或多列上执行指定的聚合操作-返回一个新的dataframe">聚合操作. agg: 一列或多列上执行指定的聚合操作，返回一个新的DataFrame</h4>
+
+<pre><code>from pyspark.sql import functions as F
+df_agg = df_products.agg(F.max(df_products.price), F.min(df_products.price), F.count(df_products.name))
+df_agg.show()
++----------+----------+-----------+
+|max(price)|min(price)|count(name)|
++----------+----------+-----------+
+|      1200|       200|          6|
++----------+----------+-----------+
+</code></pre>
+
+<h4 id="访问列">访问列</h4>
+
+<pre><code>df_customers.age # df_customers['age'] # 访问一列， 返回Column对象
+Column&lt;b'age'&gt;
+df_customers[['age','gender']].show()
++---+------+
+|age|gender|
++---+------+
+| 21|     M|
+| 25|     F|
+| 31|     M|
+| 45|     F|
+| 41|     M|
+| 45|     F|
++---+------+
+</code></pre>
+
+<h4 id="去重-删除列">去重，删除列</h4>
+
+<pre><code>#distinct 去除重复行，返回一个新的DataFram， 包含不重复的行
+df_withoutdup = df_customers.distinct()
+df_withoutdup
+# drop： 丢弃指定的列，返回一个新的DataFrame
+df_drop = df_customers.drop('age', 'gender')
+df_drop.show()
++---+--------+
+|cID|    name|
++---+--------+
+|  1|   James|
+|  2|     Liz|
+|  3|    John|
+|  4|Jennifer|
+|  5|  Robert|
+|  6|  Sandra|
++---+--------+
+
+# dropDuplicates: 根据指定列删除相同的行
+df_dropDup = df_sales.dropDuplicates(['product', 'country'])
+df_dropDup.show()
++----------+-------+-------+-------+
+|      date|product|country|revenue|
++----------+-------+-------+-------+
+|01/01/2015|     S6|  China|   9000|
+|01/02/2015| iPhone|  China|  10000|
+|01/01/2015| iPhone|    USA|  40000|
+|01/01/2015|     S6|    USA|  20000|
++----------+-------+-------+-------+
+</code></pre>
+
+<h4 id="行筛选和列选择">行筛选和列选择</h4>
+
+<pre><code># filter 筛选元素, 过滤DataFrame的行, 输入参数是一个SQL语句， 返回一个新的DataFrame
+df_filter = df_customers.filter(df_customers.age &gt; 25)
+df_filter.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  3|    John| 31|     M|
+|  4|Jennifer| 45|     F|
+|  5|  Robert| 41|     M|
+|  6|  Sandra| 45|     F|
++---+--------+---+------+
+
+
+# select 返回指定列的数据，返回一个DataFrame
+df_select = df_customers.select('name','age')
+df_select.show()
++--------+---+
+|    name|age|
++--------+---+
+|   James| 21|
+|     Liz| 25|
+|    John| 31|
+|Jennifer| 45|
+|  Robert| 41|
+|  Sandra| 45|
++--------+---+
+
+
+df_select1 = df_customers.select(df_customers['name'],df_customers['age'] +1)
+df_select1.show()
++--------+---------+
+|    name|(age + 1)|
++--------+---------+
+|   James|       22|
+|     Liz|       26|
+|    John|       32|
+|Jennifer|       46|
+|  Robert|       42|
+|  Sandra|       46|
++--------+---------+
+
+df_select2 = df_customers.selectExpr('name', 'age +1 AS new_age')
+df_select2.show() # 可以接收SQL表达式
++--------+-------+
+|    name|new_age|
++--------+-------+
+|   James|     22|
+|     Liz|     26|
+|    John|     32|
+|Jennifer|     46|
+|  Robert|     42|
+|  Sandra|     46|
++--------+-------+
+</code></pre>
+
+<h4 id="增加列-替换列">增加列，替换列</h4>
+
+<pre><code>## withColumn 对源DataFrame 做新增一列或替换一原有列的操作， 返回DataFrame
+df_new = df_products.withColumn(&quot;profit&quot;, df_products.price - df_products.cost)
+df_new.show()
++---+-------+-----+----+------+
+|pId|   name|price|cost|profit|
++---+-------+-----+----+------+
+|  1| iPhone|  600| 400|   200|
+|  2| Galaxy|  500| 400|   100|
+|  3|   iPad|  400| 300|   100|
+|  4| Kindel|  200| 100|   100|
+|  5|MacBook| 1200| 900|   300|
+|  6|   Dell|  500| 400|   100|
++---+-------+-----+----+------+
+
+## withColumnRenamed (existing, new)
+df_customers.withColumnRenamed('age', 'age2')
+DataFrame[cID: bigint, name: string, age2: bigint, gender: string]
+</code></pre>
+
+<h4 id="分组groupby">分组groupby</h4>
+
+<pre><code># groupby/groupBy 根据参数的列对源DataFrame中的行进行分组
+groupByGender = df_customers.groupBy('gender').count()
+groupByGender.show()
++------+-----+
+|gender|count|
++------+-----+
+|     F|    3|
+|     M|    3|
++------+-----+
+
+revenueByproduct = df_sales.groupBy('product').sum('revenue')
+revenueByproduct.show()
++-------+------------+
+|product|sum(revenue)|
++-------+------------+
+|     S6|       45000|
+| iPhone|       85000|
++-------+------------+
+</code></pre>
+
+<h4 id="替换replace">替换replace</h4>
+
+<pre><code>df_replace = df_customers.replace([&quot;James&quot;, &quot;Liz&quot;], [&quot;James2&quot;, &quot;Liz2&quot;], subset = [&quot;name&quot;])
+df_replace.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  1|  James2| 21|     M|
+|  2|    Liz2| 25|     F|
+|  3|    John| 31|     M|
+|  4|Jennifer| 45|     F|
+|  5|  Robert| 41|     M|
+|  6|  Sandra| 45|     F|
++---+--------+---+------+
+</code></pre>
+
+<h4 id="缺失值处理-参数pandas-dataframe类似">缺失值处理(参数pandas.DataFrame类似)</h4>
+
+<pre><code>from pyspark.sql import Row
+df = sc.parallelize([ \
+        Row(name='Alice', age=5, height=80), \
+        Row(name= None, age=5, height=70), \
+        Row(name='Bob', age=None, height=80)]).toDF()
+df.show()
++----+------+-----+
+| age|height| name|
++----+------+-----+
+|   5|    80|Alice|
+|   5|    70| null|
+|null|    80|  Bob|
++----+------+-----+
+# dropna #na.drop删除包含缺失值的列， 
+df.na.drop(how='any', thresh=None, subset=None).show() # df.dropna().show()
++---+------+-----+
+|age|height| name|
++---+------+-----+
+|  5|    80|Alice|
++---+------+-----+
+
+# fillna # na.fill # 
+df.na.fill({'age': 5, 'name': 'unknown'}).show()
++---+------+-------+
+|age|height|   name|
++---+------+-------+
+|  5|    80|  Alice|
+|  5|    70|unknown|
+|  5|    80|    Bob|
++---+------+-------+
+</code></pre>
+
+<h4 id="遍历循环">遍历循环</h4>
+
+<pre><code>##foreach: 对DataFrame的每一行进行操作
+def f(customer):
+    print(customer.age)
+df_customers.foreach(f)
+##foreachPartition, 对每一个Partition进行遍历操作
+</code></pre>
+
+<h4 id="合并">合并</h4>
+
+<pre><code>## intersect 取交集，返回一个新的DataFrame
+customers2 =  [(11,'Jackson',21,'M'), (12, &quot;Emma&quot;,25,&quot;F&quot;), (13, &quot;Olivia&quot;, 31, &quot;M&quot;),\
+     (4, &quot;Jennifer&quot;, 45, &quot;F&quot;), (5, &quot;Robert&quot;, 41, &quot;M&quot;), (6, &quot;Sandra&quot;, 45, &quot;F&quot;)]
+df_customers2 = spark.createDataFrame(customers2, [&quot;cID&quot;, &quot;name&quot;, &quot;age&quot;, &quot;gender&quot;]) # list -&gt; DF
+df_customers2.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+| 11| Jackson| 21|     M|
+| 12|    Emma| 25|     F|
+| 13|  Olivia| 31|     M|
+|  4|Jennifer| 45|     F|
+|  5|  Robert| 41|     M|
+|  6|  Sandra| 45|     F|
++---+--------+---+------+
+
+df_common = df_customers.intersect(df_customers2)
+df_common.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  6|  Sandra| 45|     F|
+|  5|  Robert| 41|     M|
+|  4|Jennifer| 45|     F|
++---+--------+---+------+
+
+## union: 返回一个新的DataFrame, 合并行. 
+# 一般后面接着distinct()
+df_union = df_customers.union(df_customers2) # 根据位置合并
+df_union.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  1|   James| 21|     M|
+|  2|     Liz| 25|     F|
+|  3|    John| 31|     M|
+|  4|Jennifer| 45|     F|
+|  5|  Robert| 41|     M|
+|  6|  Sandra| 45|     F|
+| 11| Jackson| 21|     M|
+| 12|    Emma| 25|     F|
+| 13|  Olivia| 31|     M|
+|  4|Jennifer| 45|     F|
+|  5|  Robert| 41|     M|
+|  6|  Sandra| 45|     F|
++---+--------+---+------+
+
+df_union_nodup = df_union.distinct() 
+df_union_nodup.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  6|  Sandra| 45|     F|
+|  1|   James| 21|     M|
+|  5|  Robert| 41|     M|
+|  2|     Liz| 25|     F|
+|  4|Jennifer| 45|     F|
+| 13|  Olivia| 31|     M|
+| 11| Jackson| 21|     M|
+|  3|    John| 31|     M|
+| 12|    Emma| 25|     F|
++---+--------+---+------+
+
+# unionByName 根据列名进行行合并
+df1 = spark.createDataFrame([[1,2,3]], [&quot;col0&quot;, &quot;col1&quot;, &quot;col2&quot;])
+df2 = spark.createDataFrame([[4,5,6]], [&quot;col1&quot;, &quot;col2&quot;, &quot;col0&quot;])
+df_unionbyname = df1.unionByName(df2)
+df_unionbyname.show()
++----+----+----+
+|col0|col1|col2|
++----+----+----+
+|   1|   2|   3|
+|   6|   4|   5|
++----+----+----+
+
+
+## join： 与另一个DataFrame 上面执行SQL中的连接操作。 参数：DataFrame, 连接表达式，连接类型
+transactions = [(1,5,3,&quot;01/01/2015&quot;, &quot;San Francisco&quot;), (2,6,1, &quot;01/02/2015&quot;, &quot;San Jose&quot;),\
+                (3,1,6,&quot;01/01/2015&quot;, &quot;Boston&quot;), (4,200,400,&quot;01/02/2015&quot;,&quot;Palo Alto&quot;),\
+                (6, 100, 100, &quot;01/02/2015&quot;, &quot;Mountain View&quot;)]
+df_transactions = spark.createDataFrame(transactions, ['tId', &quot;custId&quot;, &quot;date&quot;, &quot;city&quot;])
+df_transactions.show()
++---+------+----+----------+-------------+
+|tId|custId|date|      city|           _5|
++---+------+----+----------+-------------+
+|  1|     5|   3|01/01/2015|San Francisco|
+|  2|     6|   1|01/02/2015|     San Jose|
+|  3|     1|   6|01/01/2015|       Boston|
+|  4|   200| 400|01/02/2015|    Palo Alto|
+|  6|   100| 100|01/02/2015|Mountain View|
++---+------+----+----------+-------------+
+
+df_join_inner = df_transactions.join(df_customers, df_transactions.custId == df_customers.cID, &quot;inner&quot;)
+df_join_inner.show()
++---+------+----+----------+-------------+---+------+---+------+
+|tId|custId|date|      city|           _5|cID|  name|age|gender|
++---+------+----+----------+-------------+---+------+---+------+
+|  2|     6|   1|01/02/2015|     San Jose|  6|Sandra| 45|     F|
+|  1|     5|   3|01/01/2015|San Francisco|  5|Robert| 41|     M|
+|  3|     1|   6|01/01/2015|       Boston|  1| James| 21|     M|
++---+------+----+----------+-------------+---+------+---+------+
+
+df_join_outer = df_transactions.join(df_customers, df_transactions.custId == df_customers.cID, &quot;outer&quot;)
+df_join_outer.show()
+| tId|custId|date|      city|           _5| cID|    name| age|gender|
++----+------+----+----------+-------------+----+--------+----+------+
+|   2|     6|   1|01/02/2015|     San Jose|   6|  Sandra|  45|     F|
+|   1|     5|   3|01/01/2015|San Francisco|   5|  Robert|  41|     M|
+|   3|     1|   6|01/01/2015|       Boston|   1|   James|  21|     M|
+|   6|   100| 100|01/02/2015|Mountain View|null|    null|null|  null|
+|null|  null|null|      null|         null|   3|    John|  31|     M|
+|   4|   200| 400|01/02/2015|    Palo Alto|null|    null|null|  null|
+|null|  null|null|      null|         null|   2|     Liz|  25|     F|
+|null|  null|null|      null|         null|   4|Jennifer|  45|     F|
+
+df_join_left = df_transactions.join(df_customers, df_transactions.custId == df_customers.cID, &quot;left_outer&quot;)
+df_join_left.show()
++---+------+----+----------+-------------+----+------+----+------+
+|tId|custId|date|      city|           _5| cID|  name| age|gender|
++---+------+----+----------+-------------+----+------+----+------+
+|  2|     6|   1|01/02/2015|     San Jose|   6|Sandra|  45|     F|
+|  1|     5|   3|01/01/2015|San Francisco|   5|Robert|  41|     M|
+|  3|     1|   6|01/01/2015|       Boston|   1| James|  21|     M|
+|  6|   100| 100|01/02/2015|Mountain View|null|  null|null|  null|
+|  4|   200| 400|01/02/2015|    Palo Alto|null|  null|null|  null|
++---+------+----+----------+-------------+----+------+----+------+
+
+df_join_right = df_transactions.join(df_customers, df_transactions.custId == df_customers.cID, &quot;right_outer&quot;)
+df_join_right.show()
++----+------+----+----------+-------------+---+--------+---+------+
+| tId|custId|date|      city|           _5|cID|    name|age|gender|
++----+------+----+----------+-------------+---+--------+---+------+
+|   2|     6|   1|01/02/2015|     San Jose|  6|  Sandra| 45|     F|
+|   1|     5|   3|01/01/2015|San Francisco|  5|  Robert| 41|     M|
+|   3|     1|   6|01/01/2015|       Boston|  1|   James| 21|     M|
+|null|  null|null|      null|         null|  3|    John| 31|     M|
+|null|  null|null|      null|         null|  2|     Liz| 25|     F|
+|null|  null|null|      null|         null|  4|Jennifer| 45|     F|
++----+------+----+----------+-------------+---+--------+---+------+
+
+##left_semi 返回在两个表都有的行，只返回左表
+##left_anti 返回只在左表有的行
+</code></pre>
+
+<h4 id="排序">排序</h4>
+
+<pre><code>## orderBy/sort 返回按照指定列排序的DataFrame. 默认情况下按升序(asc)排列
+df_sort1 = df_customers.orderBy(&quot;name&quot;)
+df_sort1.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  1|   James| 21|     M|
+|  4|Jennifer| 45|     F|
+|  3|    John| 31|     M|
+|  2|     Liz| 25|     F|
+|  5|  Robert| 41|     M|
+|  6|  Sandra| 45|     F|
++---+--------+---+------+
+
+df_sort2 = df_customers.orderBy(['age','name'], ascending = [0, 1])
+df_sort2.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  4|Jennifer| 45|     F|
+|  6|  Sandra| 45|     F|
+|  5|  Robert| 41|     M|
+|  3|    John| 31|     M|
+|  2|     Liz| 25|     F|
+|  1|   James| 21|     M|
++---+--------+---+------+
+
+df_sort3 = df_customers.sort(&quot;name&quot;)
+df_sort3.show()
+df_sort4 = df_customers.sort(&quot;name&quot;, ascending = False)
+df_sort4.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  6|  Sandra| 45|     F|
+|  5|  Robert| 41|     M|
+|  2|     Liz| 25|     F|
+|  3|    John| 31|     M|
+|  4|Jennifer| 45|     F|
+|  1|   James| 21|     M|
++---+--------+---+------+
+</code></pre>
+
+<h4 id="抽样与分割">抽样与分割</h4>
+
+<pre><code>## sample, 返回一个DataFrame, 包含源DataFrame 指定比例行数的数据
+df_sample = df_customers.sample(withReplacement= False, fraction =0.2, seed = 1)
+df_sample.show()
++---+------+---+------+
+|cID|  name|age|gender|
++---+------+---+------+
+|  2|   Liz| 25|     F|
+|  6|Sandra| 45|     F|
++---+------+---+------+
+
+## sampleBy 按指定列，分层无放回抽样
+df_sample2 = df_sales.sampleBy('product', fractions= {&quot;iPhone&quot;: 0.5, &quot;S6&quot;: 0.5}, seed = 1)
+df_sample2.show()
++----------+-------+-------+-------+
+|      date|product|country|revenue|
++----------+-------+-------+-------+
+|01/01/2015| iPhone|    USA|  40000|
+|01/02/2015| iPhone|    USA|  30000|
+|01/02/2015| iPhone|  China|  10000|
+|01/01/2015|     S6|    USA|  20000|
+|01/02/2015|     S6|    USA|  10000|
+|01/02/2015|     S6|  China|   6000|
++----------+-------+-------+-------+
+
+## randomSplit: 把DataFrame分割成多个DataFrame
+df_splits = df_customers.randomSplit([0.6,0.2,0.2])
+df_splits[0].show()
++---+------+---+------+
+|cID|  name|age|gender|
++---+------+---+------+
+|  2|   Liz| 25|     F|
+|  3|  John| 31|     M|
+|  5|Robert| 41|     M|
++---+------+---+------+
+</code></pre>
+
+<h4 id="转化成其他常用数据对象-json-df-pandas-df">转化成其他常用数据对象， Json, DF, pandas.DF</h4>
+
+<pre><code>df_json = df_customers.toJSON()## 返回RDD, RDD每个元素是JSON对象
+df_json.first()
+'{&quot;cID&quot;:1,&quot;name&quot;:&quot;James&quot;,&quot;age&quot;:21,&quot;gender&quot;:&quot;M&quot;}'
+df_pandas = df_customers.toPandas() ## 返回pandas.DataFrame
+df_pandas
+   cID      name  age gender
+0    1     James   21      M
+1    2       Liz   25      F
+2    3      John   31      M
+3    4  Jennifer   45      F
+4    5    Robert   41      M
+5    6    Sandra   45      F
+
+rdd = df_customers.rdd #然后可以使用RDD的操作
+df = rdd.toDF().first()
+</code></pre>
+
+<h4 id="生成临时查询表">生成临时查询表</h4>
+
+<pre><code># registerTempTable. 给定名字的临时表, 用SQL进行查询
+df_customers.registerTempTable(&quot;customers_temp&quot;)
+df_search = spark.sql('select * from customers_temp where age &gt; 30')
+df_search.show()
++---+--------+---+------+
+|cID|    name|age|gender|
++---+--------+---+------+
+|  3|    John| 31|     M|
+|  4|Jennifer| 45|     F|
+|  5|  Robert| 41|     M|
+|  6|  Sandra| 45|     F|
++---+--------+---+------+
+
+# createGlobalTempView
+# createOrReplaceGlobalTempView  创建一个临时永久表，与Spark应该绑定
+# createOrReplaceTempView  生命周期与SparkSession绑定
+# createTempView
+</code></pre>
+
+<h4 id="其他函数-crossjion-crosstab-cube-rollup">其他函数 crossJion, crosstab, cube, rollup</h4>
+
+<h2 id="输出write-保存dataframe到文件中">输出write，保存DataFrame到文件中</h2>
+
+<pre><code>## json, parquet, orc, csv,text 格式, 可以写入本地文件系统， HDFS, S3上
+import os
+df_customers0 = df_customers.coalesce(numPartitions= 1) #设置NumPartition为1
+# df_customers0.write.format('json').save(&quot;savepath&quot;)
+# df_customers0.write.orc(&quot;savepath&quot;)
+df_customers0.write.csv(&quot;savepath&quot;,header=True, sep=&quot;,&quot;, mode='overwrite')
+# mode： 默认error/ append(追加)/ overwrite(重写)/ ignore(不写)
+# df_customers0.write.parquet(&quot;savepath&quot;)
+</code></pre>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />o0原的博客</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/tensorfow2-0/" data-toggle="tooltip" data-placement="top" title="Win 10 安装tensorfow2.0-gpu">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/git/" data-toggle="tooltip" data-placement="top" title="Git 常用命令">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/git" title="Git">
+                            Git
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/latex" title="Latex">
+                            Latex
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/python" title="Python">
+                            Python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/r" title="R">
+                            R
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/rcpp" title="Rcpp">
+                            Rcpp
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/spark" title="Spark">
+                            Spark
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/sublime" title="sublime">
+                            sublime
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/tensorflow" title="tensorflow">
+                            tensorflow
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/win" title="win">
+                            win
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="o0原的博客" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:xuey3836@outlook.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; o0原的博客 2020
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>
