@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="Win 10 安装tensorfow2.0-gpu" />
-    <meta property="og:title" content="Win 10 安装tensorfow2.0-gpu" />
-    <meta property="twitter:title" content="Win 10 安装tensorfow2.0-gpu" />
+    <meta name="title" content="Hive 库表操作: 创建，查看，修改，删除" />
+    <meta property="og:title" content="Hive 库表操作: 创建，查看，修改，删除" />
+    <meta property="twitter:title" content="Hive 库表操作: 创建，查看，修改，删除" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="o0原, xueyuan, Xueyuan, , o0原的网络日志, o0原的博客, Xueyuan Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Win 10 安装tensorfow2.0-gpu-o0原的博客 | yuan Blog</title>
+    <title>Hive 库表操作: 创建，查看，修改，删除-o0原的博客 | yuan Blog</title>
 
-    <link rel="canonical" href="/post/tensorfow2-0/">
+    <link rel="canonical" href="/post/2020-12-11-/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 	
@@ -171,26 +171,22 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/python" title="Python">
-                            Python
-                        </a>
-                        
-                        <a class="tag" href="/tags/tensorflow" title="tensorflow">
-                            tensorflow
+                        <a class="tag" href="/tags/hive" title="Hive">
+                            Hive
                         </a>
                         
                     </div>
-                    <h1>Win 10 安装tensorfow2.0-gpu</h1>
+                    <h1>Hive 库表操作: 创建，查看，修改，删除</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 
                         
-                                o0 原的博客
+                            yuan
                          
                         on 
-                        Friday, October 25, 2019
+                        Friday, December 11, 2020
                         
-                            <span id="/post/tensorfow2-0/" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/post/2020-12-11-/" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -354,48 +350,262 @@ $(function() {
 <ul>
 <li>
 <ul>
-<li><a href="#安装版本及时间">安装版本及时间</a></li>
-<li><a href="#配置环境">配置环境</a></li>
+<li><a href="#参考链接">参考链接:</a></li>
+<li><a href="#库操作">库操作</a></li>
+<li><a href="#表操作">表操作</a>
+<ul>
+<li><a href="#hive-数据类型-data-type">Hive 数据类型(data_type)</a></li>
+<li><a href="#存储格式-file-format">存储格式 (file_format)</a></li>
+<li><a href="#小知识">小知识</a></li>
+<li><a href="#创建表">创建表</a>
+<ul>
+<li><a href="#直接创建">直接创建</a></li>
+<li><a href="#复制表结构-使用like建表">复制表结构，使用like建表</a></li>
+<li><a href="#使用-as-select-创建表-ctas">使用 as select 创建表 CTAS</a></li>
+</ul></li>
+<li><a href="#查看表">查看表</a></li>
+<li><a href="#修改表">修改表</a>
+<ul>
+<li><a href="#修改分区">修改分区</a></li>
+</ul></li>
+<li><a href="#删除表">删除表</a></li>
+<li><a href="#写入写出">写入写出</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
                 
                 
 
-<h2 id="安装版本及时间">安装版本及时间</h2>
+<h2 id="参考链接">参考链接:</h2>
 
 <ul>
-<li>2019年10月25日</li>
-<li>Win 10</li>
-<li>python 3.6.5(anaconda)</li>
-<li>GTX 1050 Ti</li>
-<li>cuda_10.0.130_411.31_win10</li>
-<li>cudnn-10.0-windows10-x64-v7.6.1.34</li>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/Tutorial#Tutorial-Creating,Showing,Altering,andDroppingTables">Hive Tutorial</a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual">Hive LanguageManual</a></li>
 </ul>
 
-<h2 id="配置环境">配置环境</h2>
+<h2 id="库操作">库操作</h2>
 
 <ul>
-<li>cuda 安装会自动会自动配置， nvcc -V</li>
-<li>cuddn 解压拷贝到cuda 目录下,并配置环境变量
-```
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\cuddn\bin
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\extras\CUPTI\libx64</li>
+<li><p>创建库   <code>create database if not exist test;</code></p></li>
+
+<li><p>创建库带注释 <code>create database test comment &quot;learning hive&quot; location hdfs_path</code></p></li>
+
+<li><p>查看数据库 <code>show databases;</code></p></li>
+
+<li><p>查看满足条件的数据库 <code>show databases like 'price*'</code></p></li>
+
+<li><p>显示数据库的详细信息 <code>desc database extended tmp;</code></p></li>
+
+<li><p>查看正在使用的库 <code>select current_database();</code></p></li>
+
+<li><p>查看创建库时的详细语句 <code>show create database tmp;</code></p></li>
+
+<li><p>删除库 <code>drop database if exits dbname [restrict | cascade];</code></p></li>
+
+<li><p>展示库中的表 <code>show tables in dbname</code></p></li>
+
+<li><p>切换库 <code>use dbname2;</code></p></li>
 </ul>
 
-<pre><code>
+<h2 id="表操作">表操作</h2>
 
-## 安装与测试
+<h3 id="hive-数据类型-data-type">Hive 数据类型(data_type)</h3>
+
+<ul>
+<li>boolean - true/false - TRUE</li>
+<li>tinyint - 1字节(2^8)的有符号整数 -128~127 - 1</li>
+<li>smallint - 2字节(2^16)的有符号整数 -32768~32767 - 2</li>
+<li>int - 4字节的有符号整数 - 1</li>
+<li>bigint -  8字节的有符号整数 - 1</li>
+<li>float - 4字节单精度浮点数 - 1.0</li>
+<li>double - 8字节双精度浮点数 - 1.0</li>
+<li>deicimal - 任意精度的带符号小数 - 1.0</li>
+<li>String - 字符串 -  &lsquo;a&rsquo;,&ldquo;b&rdquo;</li>
+<li>varchar - 变长字符串 - &ldquo;A&rdquo;,&lsquo;b&rsquo;</li>
+<li>char - 固定长度字符串 - &ldquo;a&rdquo;,&lsquo;b&rsquo;</li>
+<li>binary - 字节数组</li>
+<li>timestamp - 时间戳，纳秒精度 - 122327493795</li>
+<li>date - 日期 - &ldquo;2020-04-07&rdquo;</li>
+<li>array - 有序的同类型的集合 - array(1,2)</li>
+<li>map - key-value - map(&lsquo;a&rsquo;,1)</li>
+<li>struct - 字段集合 - struct(&lsquo;1&rsquo;,1,1,0)</li>
+<li>union_type - uniontype <date_type, data_type, ...></li>
+</ul>
+
+<h3 id="存储格式-file-format">存储格式 (file_format)</h3>
+
+<ul>
+<li>textfile - 默认格式，行存储，数据不压缩，磁盘开销大</li>
+<li>SequenceFile - 二级制文件支持，使用方便，可分割，可压缩(NONE, RECORD(压缩率低), BLOCK)</li>
+<li>RCFile - 行列存储相结合的存储方式</li>
+<li>ORCFile - 数据按块存储，每块列存储，每个块都存储一个索引</li>
+<li>Parquet - 行式存储，压缩较好</li>
+<li>jsonfile</li>
+</ul>
+
+<h3 id="小知识">小知识</h3>
+
+<ul>
+<li><p>内部表和外部表的区别</p>
+
+<ul>
+<li>内部表由Hive 自身管理，外部表由HDFS管理</li>
+<li>删除内部表会直接删除元数据及存储数据，删除外部表仅会删除元数据，HDFS上的文件不会被删除</li>
+<li>创建外部表时，仅记录数据所在路径，不对数据位置做任何改变</li>
+</ul></li>
+
+<li><p>临时表 temporary</p>
+
+<ul>
+<li>表只对当前任务有效，关闭任务表自动删除</li>
+<li>表空间位于/tmp/hive/</li>
+<li>如果创建的临时表表名已存在，实际上使用的是临时表</li>
+</ul></li>
+</ul>
+
+<h3 id="创建表">创建表</h3>
+
+<h4 id="直接创建">直接创建</h4>
+
+<pre><code class="language-sql">create [temporary] [external] table [if not exists] [db.name] table 
+    [(col_name data_type [column_constraint_specification] [comment col_comment], ... [constraint specification] )]
+    [comment table_comment]
+    [partitioned by (col_name data_type [comment col_comment], ...)] -- 分区字段
+    [clustered by (col_name data_type [comment col_comment] ) [sorted by (col_name [ase|desc], ...)] into num_buckets buckets]
+    [row format fow_format]
+    [stored as file_format]
+    [location hdfs_path]
+    [tblproperties (property_name = property_value, ...)];
+
+-- 样例
+
+create external table if not exists tmp.create_table_test (
+sku_id string comment &quot;商品编号&quot; ,
+cid3 int comment &quot;三级品类id&quot;,
+price float comment &quot;价格&quot;,
+sale_qtty int comment &quot;销量&quot;
+)
+comment &quot;测试使用&quot;
+partitioned by (dt string comment &quot;日期&quot;)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.ql.io.orc.OrcSerde' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat'
+location
+  'hdfs://ns7/user/mart_scr/tmp.db/create_table_test'
+  tblproperties (
+    &quot;author&quot; = 'xueyuan24',
+    &quot;mart_name&quot; = &quot;mart_rmb&quot;
+);
 
 </code></pre>
 
-<p>##terminal
-pip install tensorflow-gpu
-#python
-import tensorflow as tf
-tf.test.is_gpu_available()
-print(tf.<strong>version</strong>)
-```</p>
+<h4 id="复制表结构-使用like建表">复制表结构，使用like建表</h4>
+
+<pre><code class="language-sql">create [temporary] [external] table [if not exists] [db.name]table_name like existing_table_or_view_name
+[location hdfs_path]
+
+-- 样例
+create external table if not exists tmp.create_table_test_like like tmp.create_table_test;
+
+</code></pre>
+
+<h4 id="使用-as-select-创建表-ctas">使用 as select 创建表 CTAS</h4>
+
+<pre><code class="language-sql">create table if not exists tmp.create_table_test_select as select * from tmp.create_table_test;
+
+-- 不能创建partition, external, bucket table
+</code></pre>
+
+<h3 id="查看表">查看表</h3>
+
+<ul>
+<li>查看当前库的所有表 <code>show tables</code></li>
+<li>查看某库中的所有表 <code>show tables in db_name</code></li>
+<li>查看库中已price开头的表 <code>show tables like 'price*'</code></li>
+<li>查看表的信息 <code>desc table_name</code></li>
+<li>查看表的详细信息 <code>desc extended table_name / desc fomatted table_name</code></li>
+<li>查看分区信息 <code>show partitions table _name</code></li>
+<li>查看建表详细语句 <code>show create table table_name</code></li>
+</ul>
+
+<h3 id="修改表">修改表</h3>
+
+<ul>
+<li>修改表名 <code>alter table table_name rename to new_table_name;</code></li>
+<li>添加修改字段
+
+<ul>
+<li>语法
+<code>
+ALTER TABLE table_name 
+[PARTITION partition_spec]             
+ADD|REPLACE COLUMNS (col_name data_type [COMMENT col_comment], ...)
+[CASCADE|RESTRICT]   
+</code></li>
+<li>增加一个字段 <code>alter table table_name add columns (col_name, string) [CASCADE|RESTRICT]   ;</code></li>
+<li>删除一个字段 <code>alter table table_name replace (new_name string, ...);</code> //删除字段(使用新schema替换原有的)</li>
+</ul></li>
+<li>修改字段
+
+<ul>
+<li>语法
+<code>
+ALTER TABLE table_name [PARTITION partition_spec] CHANGE [COLUMN] col_old_name col_new_name column_type
+[COMMENT col_comment] [FIRST|AFTER column_name] [CASCADE|RESTRICT];
+</code></li>
+<li>修改一个字段 <code>alter table table_name change old_name new_name string;</code></li>
+<li>添加字段注释 <code>alter table table_name change old_name old_name string comment 'this is old_name'</code></li>
+</ul></li>
+<li>添加表注释 <code>alter table table_name set tblproperties ('author' = 'my_name','commet':'表注释')</code></li>
+</ul>
+
+<h4 id="修改分区">修改分区</h4>
+
+<ul>
+<li>添加分区 <code>alter table table_name add partition(col_partition_name = 'new1');</code></li>
+<li>添加多个分区 <code>alter table table_name add partiton (col_partition_name = 'new1') partition(col_partition_name = 'new2');</code></li>
+<li>修改分区：修改分区存储目录 <code>alter table table_name if not exists partition (col_partition_name = 'new1') location *;</code></li>
+<li>删除分区 <code>alter table table_name drop partition (col_partition_name = 'new1');</code></li>
+</ul>
+
+<h3 id="删除表">删除表</h3>
+
+<ul>
+<li>删除表 <code>drop table table_name;</code></li>
+<li>清空表 <code>truncate table table_name;</code></li>
+</ul>
+
+<h3 id="写入写出">写入写出</h3>
+
+<ul>
+<li><p>插入数据到表</p>
+
+<pre><code class="language-sql">insert overwrite table new_table 
+select * from old_table;
+</code></pre></li>
+
+<li><p>动态分区插入</p>
+
+<pre><code class="language-sql">FROM page_view_stg pvs
+INSERT OVERWRITE TABLE page_view PARTITION(dt='2008-06-08', country='US')
+   SELECT pvs.viewTime, pvs.userid, pvs.page_url, pvs.referrer_url, null, null, pvs.ip WHERE pvs.country = 'US';
+</code></pre></li>
+
+<li><p>Hive 写入数据到本地</p>
+
+<pre><code class="language-sql">insert overwrite local  directory '/home/username/*'
+select * from table_name;
+</code></pre></li>
+
+<li><p>本地数据写入Hive</p>
+
+<pre><code class="language-sql">load data local inpath '/home/username/*.txt' into table table_name partition(...)
+</code></pre></li>
+</ul>
 
 
                 
@@ -444,15 +654,10 @@ print(tf.<strong>version</strong>)
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/sparkr/" data-toggle="tooltip" data-placement="top" title="SparkR">&larr;
+                        <a href="/post/git/" data-toggle="tooltip" data-placement="top" title="Git 常用命令">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/post/pyspark-sql-dataframe/" data-toggle="tooltip" data-placement="top" title="Pyspark.sql DataFrame创建, 常用操作以及输出到文件">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
 
