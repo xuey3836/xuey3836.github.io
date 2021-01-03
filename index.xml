@@ -6,17 +6,26 @@
     <description>Recent content on o0 原的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Jupyter Notebook 快捷键</title>
+      <link>/post/jupter-notebook-shortcut/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/jupter-notebook-shortcut/</guid>
+      <description>Jupyter Notebook 有两种模式，一种是命令行模式(Command Mode, 蓝色单元格)，一种是编辑模式(Edit Mode, 绿色单元格) 进入命令模式： ESC/ Ctrl + M 进入编辑模型： E</description>
+    </item>
+    
+    <item>
       <title>Hive 库表操作: 创建，查看，修改，删除</title>
-      <link>/post/2020-12-11-/</link>
+      <link>/post/2020-12-11-hiveddl/</link>
       <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020-12-11-/</guid>
+      <guid>/post/2020-12-11-hiveddl/</guid>
       <description>参考链接: Hive Tutorial Hive LanguageManual 库操作 创建库 create database if not exist test; 创建库带注释 create database test comment &amp;quot;learning hive&amp;quot; location hdfs_path 查看数据库 show databases; 查看满足条件的数据库 show databases like &#39;price*&#39; 显示数据库的详细信息 desc database extended tmp;</description>
     </item>
     
@@ -102,7 +111,7 @@
     </item>
     
     <item>
-      <title>快捷键及常用操作</title>
+      <title>Win 快捷键及常用操作</title>
       <link>/post/thinkpad-hot-key/</link>
       <pubDate>Wed, 05 Dec 2018 00:00:00 +0000</pubDate>
       
@@ -122,7 +131,7 @@ I gone back to my home at abot 12pm, and after eating lunch, I have a break for 
     </item>
     
     <item>
-      <title>R 问题汇总</title>
+      <title>R 问题</title>
       <link>/post/rquestion/</link>
       <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
       

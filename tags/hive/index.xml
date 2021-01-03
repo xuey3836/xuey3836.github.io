@@ -13,10 +13,10 @@
     
     <item>
       <title>Hive 库表操作: 创建，查看，修改，删除</title>
-      <link>/post/2020-12-11-/</link>
+      <link>/post/2020-12-11-hiveddl/</link>
       <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020-12-11-/</guid>
+      <guid>/post/2020-12-11-hiveddl/</guid>
       <description>参考链接: Hive Tutorial Hive LanguageManual 库操作 创建库 create database if not exist test; 创建库带注释 create database test comment &amp;quot;learning hive&amp;quot; location hdfs_path 查看数据库 show databases; 查看满足条件的数据库 show databases like &#39;price*&#39; 显示数据库的详细信息 desc database extended tmp;</description>
     </item>
     

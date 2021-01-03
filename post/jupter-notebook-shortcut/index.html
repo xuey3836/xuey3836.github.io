@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="Life in UCAS" />
-    <meta property="og:title" content="Life in UCAS" />
-    <meta property="twitter:title" content="Life in UCAS" />
+    <meta name="title" content="Jupyter Notebook 快捷键" />
+    <meta property="og:title" content="Jupyter Notebook 快捷键" />
+    <meta property="twitter:title" content="Jupyter Notebook 快捷键" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="o0原, xueyuan, Xueyuan, , o0原的网络日志, o0原的博客, Xueyuan Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Life in UCAS-o0原的博客 | yuan Blog</title>
+    <title>Jupyter Notebook 快捷键-o0原的博客 | yuan Blog</title>
 
-    <link rel="canonical" href="/post/life-in-ucas/">
+    <link rel="canonical" href="/post/jupter-notebook-shortcut/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 	
@@ -167,18 +167,22 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/python" title="Python">
+                            Python
+                        </a>
+                        
                     </div>
-                    <h1>Life in UCAS</h1>
+                    <h1>Jupyter Notebook 快捷键</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 
                         
-                            yuan
+                            xueyuan24
                          
                         on 
-                        Sunday, September 15, 2019
+                        Sunday, January 3, 2021
                         
-                            <span id="/post/life-in-ucas/" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/post/jupter-notebook-shortcut/" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -342,16 +346,117 @@ $(function() {
 <ul>
 <li>
 <ul>
-<li><a href="#新的生活新的开始">新的生活新的开始</a></li>
+<li><a href="#1-1-命令模式-command-mode">1.1. 命令模式 (Command Mode)</a>
+<ul>
+<li><a href="#1-1-1-内核">1.1.1. 内核</a></li>
+<li><a href="#1-1-2-单元格格式">1.1.2. 单元格格式</a></li>
+<li><a href="#1-1-3-选择单元格">1.1.3. 选择单元格</a></li>
+<li><a href="#1-1-4-编辑单元格">1.1.4. 编辑单元格</a></li>
+</ul></li>
+<li><a href="#1-2-编辑模式">1.2. 编辑模式</a>
+<ul>
+<li><a href="#1-2-1-跳转">1.2.1. 跳转</a></li>
+<li><a href="#1-2-2-运行">1.2.2. 运行</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
                 
                 
 
-<h2 id="新的生活新的开始">新的生活新的开始</h2>
+<p>Jupyter Notebook 有两种模式，一种是命令行模式(Command Mode, 蓝色单元格)，一种是编辑模式(Edit Mode, 绿色单元格)</p>
 
-<p>今天是2019年的9月15日，准备重新记录自己的生活以及所学，希望这样的一个积累，让自己有所进步</p>
+<ul>
+<li>进入命令模式： ESC/ Ctrl + M</li>
+
+<li><p>进入编辑模型： Enter/鼠标左键</p></li>
+
+<li><p>编辑快捷键：帮助-编辑快捷键</p></li>
+</ul>
+
+<h2 id="1-1-命令模式-command-mode">1.1. 命令模式 (Command Mode)</h2>
+
+<ul>
+<li>H 显示快捷键</li>
+</ul>
+
+<h3 id="1-1-1-内核">1.1.1. 内核</h3>
+
+<ul>
+<li>I,I : 中断Notebook内核</li>
+<li>0,0 : 重启Notebook内核
+<br /></li>
+</ul>
+
+<h3 id="1-1-2-单元格格式">1.1.2. 单元格格式</h3>
+
+<ul>
+<li>Y: 单元格进入代码格式</li>
+<li>M: 单元格进入Markdown 模式</li>
+<li>R: 清除单元格格式</li>
+<li>1：把代码块变成heading 1</li>
+<li>2：把代码块变成heading 2</li>
+<li>3：把代码块变成heading 3</li>
+<li>4：把代码块变成heading 4</li>
+</ul>
+
+<h3 id="1-1-3-选择单元格">1.1.3. 选择单元格</h3>
+
+<ul>
+<li>K/上(J/下) 选择上(下)方单元格</li>
+<li>Shift + 上/K(下/J): 扩展向上选择</li>
+<li>Shift + 空格 向上滚动</li>
+<li>空格 向下滚动</li>
+</ul>
+
+<h3 id="1-1-4-编辑单元格">1.1.4. 编辑单元格</h3>
+
+<ul>
+<li>Shift + M 合并单元格</li>
+<li>A/B 在上(下)插入单元格</li>
+<li>X 剪切单元格</li>
+<li>C 复制单元格</li>
+<li>Shift+V 粘贴在上面</li>
+<li>V 粘贴在下面</li>
+<li>Z 撤销删除</li>
+<li>D,D 删除选中单元格</li>
+<li>S/Ctrl + S 保存并检查</li>
+<li>Shift + L 全部代码块显示行号</li>
+<li>L 显示当前代码块行号</li>
+<li>F 查找替换</li>
+<li>O 隐藏输出</li>
+</ul>
+
+<h2 id="1-2-编辑模式">1.2. 编辑模式</h2>
+
+<ul>
+<li>ALT + 鼠标左键 多行编辑</li>
+<li>Shift + Tab会显示你刚才输入对象的文档</li>
+<li>Ctrl + A 全选</li>
+<li>Ctrl + X/C/V 剪切/复制/粘贴</li>
+<li>Ctrl + Z 撤销</li>
+<li>Ctrl + Y 重做</li>
+<li>Ctrl + / 注释</li>
+<li>Ctrl + D 删除整行</li>
+<li>Ctrl + U 撤销选择</li>
+<li>Ctrl + S 保存</li>
+<li>Ctrl + Shift + M 在光标处分割代码块</li>
+</ul>
+
+<h3 id="1-2-1-跳转">1.2.1. 跳转</h3>
+
+<ul>
+<li>Ctrl + Home/上 跳到单元格起始处</li>
+<li>Ctrl + End/下 跳到单元格末尾</li>
+<li>Ctrl + 左/右 跳至单词左/右边</li>
+</ul>
+
+<h3 id="1-2-2-运行">1.2.2. 运行</h3>
+
+<ul>
+<li>Shift + Enter 运行代码块, 选择下面的代码块</li>
+<li>Ctrl + Enter  运行选中的代码块</li>
+</ul>
 
 
                 
@@ -400,15 +505,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/rcpp-and-rcpparmaillo-usefull-tips/" data-toggle="tooltip" data-placement="top" title="Rcpp and RcppArmaillo usefull tips">&larr;
+                        <a href="/post/2020-12-11-hiveddl/" data-toggle="tooltip" data-placement="top" title="Hive 库表操作: 创建，查看，修改，删除">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/post/install-spark-on-win-10-with-python/" data-toggle="tooltip" data-placement="top" title="Install Spark on win 10 with python">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
 

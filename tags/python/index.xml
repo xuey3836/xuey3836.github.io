@@ -6,10 +6,19 @@
     <description>Recent content in Python on o0 原的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Jupyter Notebook 快捷键</title>
+      <link>/post/jupter-notebook-shortcut/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/jupter-notebook-shortcut/</guid>
+      <description>Jupyter Notebook 有两种模式，一种是命令行模式(Command Mode, 蓝色单元格)，一种是编辑模式(Edit Mode, 绿色单元格) 进入命令模式： ESC/ Ctrl + M 进入编辑模型： E</description>
+    </item>
     
     <item>
       <title>Pyspark.sql DataFrame创建, 常用操作以及输出到文件</title>
