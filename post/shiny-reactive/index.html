@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="o0 原的博客">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/IMG_3425.jpg">
+    <meta property="twitter:image" content="//img/IMG_3425.jpg" />
+    
+
+    
+    <meta name="title" content="Shiny - Reactive" />
+    <meta property="og:title" content="Shiny - Reactive" />
+    <meta property="twitter:title" content="Shiny - Reactive" />
+    
+
+    
+    <meta name="description" content="o0原，数据科学, 生活探险家 | 这里是 o0原 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="o0原，数据科学, 生活探险家 | 这里是 o0原 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="o0原，数据科学, 生活探险家 | 这里是 o0原 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="o0原, xueyuan, Xueyuan, , o0原的网络日志, o0原的博客, Xueyuan Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Shiny - Reactive-o0原的博客 | yuan Blog</title>
+
+    <link rel="canonical" href="/post/shiny-reactive/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">o0 原的博客</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/life">Life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tech">Tech</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tips">Tips</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/IMG_3425.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/shiny" title="shiny">
+                            shiny
+                        </a>
+                        
+                    </div>
+                    <h1>Shiny - Reactive</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            yuan
+                         
+                        on 
+                        Sunday, May 2, 2021
+                        
+                            <span id="/post/shiny-reactive/" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                <nav id="TableOfContents">
+<ul>
+<li><a href="#reactive">Reactive</a>
+<ul>
+<li><a href="#observe-observeevent">observe, observeEvent</a>
+<ul>
+<li><a href="#observe">observe</a></li>
+<li><a href="#observeevent">observeEvent</a></li>
+<li><a href="#eventreactive">eventReactive</a></li>
+</ul></li>
+<li><a href="#reactivevalues">reactiveValues</a>
+<ul>
+<li><a href="#isolate">isolate</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                
+                
+
+<h1 id="reactive">Reactive</h1>
+
+<p>当在server函数时，希望能够多次使用由输入控制的这样一个交互式的变量时候，你没必要在每一个render*函数里重新计算它，这时可以使用reactive函数，定义一个交互式变量， 它可以缓存值，并知道什么时候更新。
+- 第一次运行reactive时，该表达式会将其结果保存在计算机内存中
+- 下次调用时，它可以不执行计算而返回保存的值。
+- 如果表达式得知结果已过时（因为widgets更改），则表达式将重新计算结果，然后返回结果并保存新副本，表达式将使用这个新副本，直至它也变得过时。</p>
+
+<p>reactive函数时lazy的，这意味着函数内的表达式仅在它依赖小组件widgets参数发生变化（重新计算output）的时候才执行。每当小部件发生更改时，reactive表达式都会更新该值，可以作为其他表达式的输入。</p>
+
+<p>reactive表达式通过reactive函数创建，把R代码放在reactive函数内的大括号内，如下所示, 更改输入时</p>
+
+<pre><code class="language-r">dataInput &lt;-  reactive({
+    rnorm(1000, input$mean, 1)
+})
+
+output$mean &lt;- renderPrint({
+    mean(dataInput())
+})
+</code></pre>
+
+<h2 id="observe-observeevent">observe, observeEvent</h2>
+
+<p><a href="https://stackoverflow.com/questions/53016404/advantages-of-reactive-vs-observe-vs-observeevent">参考链接</a></p>
+
+<h3 id="observe">observe</h3>
+
+<p>observe 与 reactive 比较类似，区别是observe不回将任何值返回到其他环境中，并且不是lazy的。observe函数监测所在在其环境内的交互变量，当变量发生变化时，它就会重新计算。它不会等待被调用计算，同时也不能通过observe给变量赋值，不返回变量，不能用作其它reactive表达式的输入。</p>
+
+<p>当你需要额外的显示（side effects（副作用，例如悬浮的提示窗口）:），才使用observe，一般情况下使用reactive就可以。</p>
+
+<p>也可以调试代码，跟踪reactive变量</p>
+
+<pre><code class="language-r">server &lt;- function(input, output){
+    observe({
+        print(input$num)
+    })
+}
+</code></pre>
+
+<h3 id="observeevent">observeEvent</h3>
+
+<p>使用observeEvent的最佳方法是将其视为已定义的触发器，因为它监视一个事件或变量的更改，然后在事件发生时触发。 通常可以使用它来监视按钮的输入，因为这是一个已定义的事件，在该事件中，我希望按钮被按下后才能发生，它使用一个隔离的环境。</p>
+
+<p>在此环境中，我们可以调用一堆反应变量，但是我们仅将一个定义为触发器。observeEvent和observe之间的主要区别是触发器，因为observe在任何变化时都会运行，而observeEvent会等待触发器。请注意，此环境类似于观察到的环境，因为它不返回变量。</p>
+
+<pre><code class="language-r">library(shiny)
+
+ui&lt;-
+  fluidPage(
+    fluidRow(
+      column(4,
+             h2(&quot;Reactive Test&quot;),
+             textInput(&quot;Test_R&quot;,&quot;Test_R&quot;),
+             textInput(&quot;Test_R2&quot;,&quot;Test_R2&quot;),
+             textInput(&quot;Test_R3&quot;,&quot;Test_R3&quot;),
+             tableOutput(&quot;React_Out&quot;)
+      ),
+      column(4,
+             h2(&quot;Observe Test&quot;),
+             textInput(&quot;Test&quot;,&quot;Test&quot;),
+             textInput(&quot;Test2&quot;,&quot;Test2&quot;),
+             textInput(&quot;Test3&quot;,&quot;Test3&quot;),
+             tableOutput(&quot;Observe_Out&quot;)
+      ),
+      column(4,
+             h2(&quot;Observe Event Test&quot;),
+             textInput(&quot;Test_OE&quot;,&quot;Test_OE&quot;),
+             textInput(&quot;Test_OE2&quot;,&quot;Test_OE2&quot;),
+             textInput(&quot;Test_OE3&quot;,&quot;Test_OE3&quot;),
+             tableOutput(&quot;Observe_Out_E&quot;),
+             actionButton(&quot;Go&quot;,&quot;Test&quot;)
+      )
+      
+    ),
+    fluidRow(
+      column(8,
+             h4(&quot;Note that observe and reactive work very much the same on the surface,
+       it is when we get into the server where we see the differences, and how those
+       can be exploited for diffrent uses.&quot;)
+      ))
+    
+  )
+
+server&lt;-function(input,output,session){
+  
+  # Create a reactive Evironment. Note that we can call the varaible outside same place
+  # where it was created by calling Reactive_Var(). When the varaible is called by
+  # renderTable is when it is evaluated. No real diffrence on the surface, all in the server.
+  
+  Reactive_Var&lt;-reactive({c(input$Test_R, input$Test_R2, input$Test_R3)})
+  
+  output$React_Out&lt;-renderTable({
+    Reactive_Var()
+  })
+  
+  # Create an observe Evironment. Note that we cannot access the created &quot;df&quot; outside 
+  # of the env. A, B,and C will update with any input into any of the three Text Feilds.
+  observe({
+    A&lt;-input$Test
+    B&lt;-input$Test2
+    C&lt;-input$Test3
+    df&lt;-c(A,B,C)
+    output$Observe_Out&lt;-renderTable({df})
+  })
+  
+  #We can change any input as much as we want, but the code wont run until the trigger
+  # input$Go is pressed.
+  observeEvent(input$Go, {
+    A&lt;-input$Test_OE
+    B&lt;-input$Test_OE2
+    C&lt;-input$Test_OE3
+    df&lt;-c(A,B,C)
+    output$Observe_Out_E&lt;-renderTable({df})
+  })
+  
+}
+shinyApp(ui, server)
+</code></pre>
+
+<h3 id="eventreactive">eventReactive</h3>
+
+<p>创建一个变量，其定义的触发器类似于observeEvent。 当您想要一个因触发器而求值的反应性变量而不是在调用它时使用此变量。</p>
+
+<h2 id="reactivevalues">reactiveValues</h2>
+
+<p>reactiveValues 可用于存储其其它表达式可以依赖的对象。是一个reactive的list。当能够使用reactive函数时，就不要使用reactiveValues,当无法使用reactive时，再考虑使用reactiveValues。reactiveVal与reactiveValues一样，除了前者只针对一个单独的reactive变量，后者可以包括多个变量。</p>
+
+<p>当一个变量需要更新多次时，可以考虑使用reactiveValues.<br />
+<a href="https://stackoverflow.com/questions/39436713/r-shiny-reactivevalues-vs-reactive/39440482#39440482">参考</a></p>
+
+<pre><code class="language-r">library(shiny)
+
+fib &lt;- function(n) ifelse(n &lt; 3, 1, fib(n - 1) + fib(n - 2))
+
+ui &lt;- fluidPage(
+  selectInput(&quot;nselect&quot;, &quot;Choose a pre-defined number&quot;, 1:10),
+  numericInput(&quot;nfree&quot;, &quot;Or type any number&quot;, 1),
+  &quot;Fib number:&quot;,
+  textOutput(&quot;nthval&quot;, inline = TRUE)
+)
+
+server &lt;- function(input, output, session) {
+  values &lt;- reactiveValues(n = 1)
+
+  observeEvent(input$nselect, {
+    values$n &lt;- input$nselect
+  })
+  observeEvent(input$nfree, {
+    values$n &lt;- input$nfree
+  })
+  output$nthval &lt;- renderText({
+    fib(as.integer(values$n))
+  })
+}
+shinyApp(ui = ui, server = server)
+</code></pre>
+
+<h3 id="isolate">isolate</h3>
+
+<p>可以获取reactive变量或表达式，取消变量的依赖性。如果你把变量放在isolate函数里，那么该reactive不在依赖输入的更改。告诉 Shiny 主调observer或reactive不应该与任何包裹于该函数内的响应对象形成依赖关系。</p>
+
+<pre><code class="language-r">r &lt;- reactiveValues(count = 0, x = 1)
+observe({
+  r$x
+  r$count &lt;- r$count + 1
+})
+</code></pre>
+
+<p>想象一下，上述的count变量由于不断地更新，根据observe的特性，count更新之后会执行，执行导致count更新，这样一直反复，无法终止。而isolate可以解决这个问题，这个可以获得当前reactive变量的值而不依赖它。</p>
+
+<pre><code class="language-r">observe({
+  r$x
+  r$count &lt;- isolate(r$count) + 1
+})
+</code></pre>
+
+<ul>
+<li>isolate内的代码不会被跳过，代码块运行一次它就运行一次</li>
+<li>isolate内的变量能够被isolate环境外的代码所使用</li>
+</ul>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />o0 原的博客</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/shiny-ui-layout/" data-toggle="tooltip" data-placement="top" title="Shiny - UI 布局排版">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/git" title="Git">
+                            Git
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/hive" title="Hive">
+                            Hive
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/latex" title="Latex">
+                            Latex
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/python" title="Python">
+                            Python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/r" title="R">
+                            R
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/rcpp" title="Rcpp">
+                            Rcpp
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/spark" title="Spark">
+                            Spark
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/shiny" title="shiny">
+                            shiny
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/sublime" title="sublime">
+                            sublime
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/tensorflow" title="tensorflow">
+                            tensorflow
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/win" title="win">
+                            win
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="o0 原的博客" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:xuey3836@outlook.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; o0 原的博客 2021
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

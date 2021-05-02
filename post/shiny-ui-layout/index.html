@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="o0 原的博客">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/IMG_3425.jpg">
+    <meta property="twitter:image" content="//img/IMG_3425.jpg" />
+    
+
+    
+    <meta name="title" content="Shiny - UI 布局排版" />
+    <meta property="og:title" content="Shiny - UI 布局排版" />
+    <meta property="twitter:title" content="Shiny - UI 布局排版" />
+    
+
+    
+    <meta name="description" content="o0原，数据科学, 生活探险家 | 这里是 o0原 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="o0原，数据科学, 生活探险家 | 这里是 o0原 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="o0原，数据科学, 生活探险家 | 这里是 o0原 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="o0原, xueyuan, Xueyuan, , o0原的网络日志, o0原的博客, Xueyuan Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Shiny - UI 布局排版-o0原的博客 | yuan Blog</title>
+
+    <link rel="canonical" href="/post/shiny-ui-layout/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">o0 原的博客</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/life">Life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tech">Tech</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tips">Tips</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/IMG_3425.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Shiny - UI 布局排版</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            yuan
+                         
+                        on 
+                        Sunday, May 2, 2021
+                        
+                            <span id="/post/shiny-ui-layout/" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                <nav id="TableOfContents">
+<ul>
+<li><a href="#ui-布局排版">UI 布局排版</a>
+<ul>
+<li><a href="#主要函数">主要函数</a></li>
+<li><a href="#siderbar-layout">Siderbar Layout</a></li>
+<li><a href="#grid-layout">Grid Layout</a></li>
+<li><a href="#tabsets">Tabsets</a></li>
+<li><a href="#navlists">Navlists</a></li>
+<li><a href="#navbar-pages">Navbar Pages</a></li>
+<li><a href="#其他布局">其他布局</a></li>
+</ul></li>
+</ul>
+</nav>
+                
+                
+
+<h1 id="ui-布局排版">UI 布局排版</h1>
+
+<p>shiny 包括许多用于布局应用程序组件的工具，下面主要介绍一下几个布局功能
+- 简单布局, SidebarLayout 里面放一个 sidebarPanel() 作为侧边栏输入，加上一个 mainPanel() 作为主区域输出
+- 网格布局, fluidRow, column
+- 多组件布局, tabsetPanel 和 navlistPanel
+- 多个页面应用程序, navbarPage
+- 其它常用布局函数</p>
+
+<p>所有这些功能都可以通过Bootstrap（一种非常流行的HTML / CSS框架）使用，当然你没有使用Bootstrap的经验也是没问题的。</p>
+
+<h2 id="主要函数">主要函数</h2>
+
+<p>可以将多个部件组合在一个面板中，
+- titlePanel，标题
+- sidebarPanel， 侧边栏
+- mainPanel， 主面板
+- tabPanel， 标签页面
+- tabsetPanel， 多个页面，搭配tabPanel使用
+- navistPanel， 多个列表页面，搭配tabPanel使用
+- wellPanel， 灰底有边界
+- absolutePanel， fixedPanel 固定位置的面板
+- condtionalPanel 满足条件才展示</p>
+
+<h2 id="siderbar-layout">Siderbar Layout</h2>
+
+<p>SiderbarLayout 是大多数应用最常用的布局，也是比较基础的布局方式。它提供一个侧边栏 siderbarPanel 用于输入，一个主面板用于输出。 siderbar 也可以默认是放在 mainPanel 的左边，但也可以放在 mainPanel 的右边。如下图所示，
+<div align = 'center'>
+<img src = https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/images/01_hello.png width = 80% />
+</div></p>
+
+<p>ui的代码如下，</p>
+
+<pre><code class="language-r">ui &lt;- fluidPage(
+
+  titlePanel(&quot;Hello Shiny!&quot;),
+
+  sidebarLayout(
+
+    sidebarPanel(
+    # position = &quot;right&quot;,
+      sliderInput(
+        &quot;bins&quot;, label = &quot;Number of bins:&quot;,
+        min = 1, value = 30, max = 50
+      )
+    ),
+
+    mainPanel(
+      plotOutput(&quot;distPlot&quot;)
+    )
+  )
+)
+</code></pre>
+
+<h2 id="grid-layout">Grid Layout</h2>
+
+<p>Shiny 可以基于 fluidRow 模块实现网格布局，通过column控制每列占的宽度。列的控制是基于Bootstrap 宽度为12的网格系统，它一个页面分为12个基础宽度，通过column来指定占用几个宽度。</p>
+
+<p>通过将offset参数添加到column函数，可以将列向右移动。每个偏移量单位将一列的左边距增加整列。</p>
+
+<div align = 'center'>
+<img src = https://shiny.rstudio.com/images/Shiny-Application-Layout-Guide-images/columnLayout.png width = 90% />
+</div>
+
+<p>ui 代码如下，代码解释
+  1. 页面下方将分为三列，每个列占据不同的宽度
+  2. 中间列使用offset参数来控制第一列和中间列的间隔
+  3. 网格布局fluidRow可以在fuildPage的任意位置使用，而且可以嵌套在fluidRow，每一个fluidRow宽度加起来都是12</p>
+
+<pre><code class="language-r">library(shiny)
+library(ggplot2)
+
+dataset &lt;- diamonds
+
+ui &lt;- fluidPage(
+
+  title = &quot;Diamonds Explorer&quot;,
+  
+  plotOutput('plot'),
+  
+  hr(),
+
+  fluidRow(
+    column(3,
+      h4(&quot;Diamonds Explorer&quot;),
+      sliderInput('sampleSize', 'Sample Size', 
+                  min=1, max=nrow(dataset), value=min(1000, nrow(dataset)), 
+                  step=500, round=0),
+      br(),
+      checkboxInput('jitter', 'Jitter'),
+      checkboxInput('smooth', 'Smooth')
+    ),
+    column(4, offset = 1,
+      selectInput('x', 'X', names(dataset)),
+      selectInput('y', 'Y', names(dataset), names(dataset)[[2]]),
+      selectInput('color', 'Color', c('None', names(dataset)))
+    ),
+    column(4,
+      selectInput('facet_row', 'Facet Row', c(None='.', names(dataset))),
+      selectInput('facet_col', 'Facet Column', c(None='.', names(dataset)))
+    )
+  )
+)
+</code></pre>
+
+<h2 id="tabsets">Tabsets</h2>
+
+<p>当我们需要将页面分为多个部分，如下图所示，主面板包含plot, summary和table三个部分。这时我们需要使用tabsetPanel 函数，输出这三个标签栏。
+<div align = 'center'>
+<img src = https://shiny.rstudio.com/images/Shiny-Application-Layout-Guide-images/tabsets.png width = 90% />
+</div></p>
+
+<p>ui中实现此部分的代码如下</p>
+
+<p><details>
+  <summary>Tabsets实例</summary>
+  <code><pre>
+    library(shiny)
+    # Define UI for random distribution app &mdash;-
+    ui &lt;- fluidPage(
+        # App title &mdash;-
+        titlePanel(&ldquo;Tabsets&rdquo;),
+        sidebarLayout(
+            # Sidebar panel for inputs &mdash;-
+            sidebarPanel(
+            # Input: Select the random distribution type &mdash;-
+            radioButtons(&ldquo;dist&rdquo;, &ldquo;Distribution type:&ldquo;,
+                        c(&ldquo;Normal&rdquo; = &ldquo;norm&rdquo;,
+                            &ldquo;Uniform&rdquo; = &ldquo;unif&rdquo;,
+                            &ldquo;Log-normal&rdquo; = &ldquo;lnorm&rdquo;,
+                            &ldquo;Exponential&rdquo; = &ldquo;exp&rdquo;)),
+            # br() element to introduce extra vertical spacing &mdash;-
+            br(),
+            # Input: Slider for the number of observations to generate &mdash;-
+            sliderInput(&ldquo;n&rdquo;,
+                        &ldquo;Number of observations:&ldquo;,
+                        value = 500,
+                        min = 1,
+                        max = 1000)
+            ),
+            # Main panel for displaying outputs &mdash;-
+            mainPanel(
+            # Output: Tabset w/ plot, summary, and table &mdash;-
+            tabsetPanel(type = &ldquo;tabs&rdquo;,
+                        tabPanel(&ldquo;Plot&rdquo;, plotOutput(&ldquo;plot&rdquo;)),
+                        tabPanel(&ldquo;Summary&rdquo;, verbatimTextOutput(&ldquo;summary&rdquo;)),
+                        tabPanel(&ldquo;Table&rdquo;, tableOutput(&ldquo;table&rdquo;))
+            )
+        )
+    )
+    )
+    # Define server logic for random distribution app &mdash;-
+    server &lt;- function(input, output) {
+        # Reactive expression to generate the requested distribution &mdash;-
+        # This is called whenever the inputs change. The output functions
+        # defined below then use the value computed from this expression
+        d &lt;- reactive({
+            dist &lt;- switch(input$dist,
+                        norm = rnorm,
+                        unif = runif,
+                        lnorm = rlnorm,
+                        exp = rexp,
+                        rnorm)
+            dist(input$n)
+        })
+        # Generate a plot of the data &mdash;-
+        # Also uses the inputs to build the plot label. Note that the
+        # dependencies on the inputs and the data reactive expression are
+        # both tracked, and all expressions are called in the sequence
+        # implied by the dependency graph.
+        output$plot &lt;- renderPlot({
+            dist &lt;- input$dist
+            n &lt;- input$n
+            hist(d(),
+                main = paste(&ldquo;r&rdquo;, dist, &ldquo;(&rdquo;, n, &ldquo;)&rdquo;, sep = &ldquo;&rdquo;),
+                col = &ldquo;#75AADB&rdquo;, border = &ldquo;white&rdquo;)
+        })
+        # Generate a summary of the data &mdash;-
+        output$summary &lt;- renderPrint({
+            summary(d())
+        })
+        # Generate an HTML table view of the data &mdash;-
+        output$table &lt;- renderTable({
+            d()
+        })
+    }
+    # Create Shiny app &mdash;-
+    shinyApp(ui, server)
+</pre>
+  </code>
+</details></p>
+
+<h2 id="navlists">Navlists</h2>
+
+<p>当你有许多个TabPanels需要展示的时候，使用Navlist会比Tabsets 更好。Navlist将各种组件呈现为侧边栏列表，而不是使用标签。 它还支持部分标题和分隔符，以便更长的列表, 如下图所示，</p>
+
+<div align = 'center'>
+<img src =https://shiny.rstudio.com/images/Shiny-Application-Layout-Guide-images/navlistPanel.png width = 90% />
+</div>
+
+<p>相应的UI代码如下</p>
+
+<pre><code class="language-r">ui &lt;- fluidPage(
+  
+  titlePanel(&quot;Application Title&quot;),
+  
+  navlistPanel(
+    &quot;Header A&quot;,
+    tabPanel(&quot;Component 1&quot;),
+    tabPanel(&quot;Component 2&quot;),
+    &quot;Header B&quot;,
+    tabPanel(&quot;Component 3&quot;),
+    tabPanel(&quot;Component 4&quot;),
+    &quot;-----&quot;,
+    tabPanel(&quot;Component 5&quot;)
+  )
+)
+</code></pre>
+
+<h2 id="navbar-pages">Navbar Pages</h2>
+
+<p>您可能希望创建一个shiny应用程序，该应用程序由多个不同的子组件（每个都有自己的侧边栏，tabPanels或其他布局构造）组成。 NavbarPage 函数在顶部可以创建多个页面。
+<div align = 'center'>
+<img src =https://shiny.rstudio.com/images/Shiny-Application-Layout-Guide-images/navbarPage.png width = 90% />
+</div>
+相应的UI代码</p>
+
+<pre><code class="language-r">ui &lt;- navbarPage(&quot;My Application&quot;,
+  tabPanel(&quot;Component 1&quot;),
+  tabPanel(&quot;Component 2&quot;),
+  tabPanel(&quot;Component 3&quot;)
+)
+</code></pre>
+
+<p>当你有很多个组件页面的时候，可以采用下面这种方式，使用navbarMedu函数，
+<div align = 'center'>
+<img src =https://shiny.rstudio.com/images/Shiny-Application-Layout-Guide-images/navbarMenu.png width = 90% />
+</div>
+相应的UI代码</p>
+
+<pre><code class="language-r">ui &lt;- navbarPage(&quot;My Application&quot;,
+  tabPanel(&quot;Component 1&quot;),
+  tabPanel(&quot;Component 2&quot;),
+  navbarMenu(&quot;More&quot;,
+    tabPanel(&quot;Sub-Component A&quot;),
+    tabPanel(&quot;Sub-Component B&quot;))
+)
+</code></pre>
+
+<h2 id="其他布局">其他布局</h2>
+
+<ul>
+<li>splitLayout 均匀分割页面</li>
+<li>verticalLayout 竖着排列页面</li>
+<li>flowLayout 按顺序排列页面</li>
+</ul>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />o0 原的博客</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/shiny/" data-toggle="tooltip" data-placement="top" title="Shiny - UI 简介">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/shiny-reactive/" data-toggle="tooltip" data-placement="top" title="Shiny - Reactive">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/git" title="Git">
+                            Git
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/hive" title="Hive">
+                            Hive
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/latex" title="Latex">
+                            Latex
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/python" title="Python">
+                            Python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/r" title="R">
+                            R
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/rcpp" title="Rcpp">
+                            Rcpp
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/spark" title="Spark">
+                            Spark
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/shiny" title="shiny">
+                            shiny
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/sublime" title="sublime">
+                            sublime
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/tensorflow" title="tensorflow">
+                            tensorflow
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/win" title="win">
+                            win
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="o0 原的博客" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:xuey3836@outlook.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; o0 原的博客 2021
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

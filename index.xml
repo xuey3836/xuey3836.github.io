@@ -6,10 +6,73 @@
     <description>Recent content on o0 原的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Shiny - Reactive</title>
+      <link>/post/shiny-reactive/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/shiny-reactive/</guid>
+      <description>Reactive 当在server函数时，希望能够多次使用由输入控制的这样一个交互式的变量时候，你没必要在每一个render*函数里重新计算它，这时可以使用</description>
+    </item>
+    
+    <item>
+      <title>Shiny - UI 布局排版</title>
+      <link>/post/shiny-ui-layout/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/shiny-ui-layout/</guid>
+      <description>UI 布局排版 shiny 包括许多用于布局应用程序组件的工具，下面主要介绍一下几个布局功能 - 简单布局, SidebarLayout 里面放一个 sidebarPanel() 作为侧边栏输入，加上一个 mainPanel() 作为主区域输</description>
+    </item>
+    
+    <item>
+      <title>Shiny - UI 简介</title>
+      <link>/post/shiny/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/shiny/</guid>
+      <description>创建UI 如何自己设计展示的UI， 在shiny应用包括添加文字，图片和其它网页操作，学习如何排版。 布局排版 shiny 使用 fluidPage 函数创建页面，该函数可以根据</description>
+    </item>
+    
+    <item>
+      <title>Shiny - 交互式输出简介</title>
+      <link>/post/shiny-reactive-introduction/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/shiny-reactive-introduction/</guid>
+      <description>交互式输出 接下来讲述如何在shiny应用程序中生产反应式输出，当用户更改widget值时，在用户界面就会有对应的输出。 新的shiny应用需要</description>
+    </item>
+    
+    <item>
+      <title>Shiny - 输入小组件（widgets）</title>
+      <link>/post/shiny-widgets/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/shiny-widgets/</guid>
+      <description>输入组件 widgets widgets 是用户与shiny交互的web元素，为用户提供一种将消息发送到shiny应用的方法。下面介绍如何向shiny应用添加这些小组件。</description>
+    </item>
+    
+    <item>
+      <title>Shiny 简介</title>
+      <link>/post/shiny/</link>
+      <pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/shiny/</guid>
+      <description>Shiny 简介 Shiny是一个R软件包，可轻松从R直接构建交互式Web应用程序。您可以在网页上托管独立应用程序，也可以将其嵌入R Markdown文档</description>
+    </item>
+    
+    <item>
+      <title>Vscode 快捷键</title>
+      <link>/post/vscode-shortcut/</link>
+      <pubDate>Sat, 09 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/vscode-shortcut/</guid>
+      <description>Vscode 快捷键 主命令行，打开命令面板: F1 / Ctrl + Shift + P 按BackSpace 进入 Ctrl+P 模式 Ctrl+P 导航，去往文件 &amp;rsquo;&amp;gt;&amp;rsquo; , 进入命令面板 文件名 &amp;rsquo;?&amp;lsquo;, 当前可执行操作 &amp;rsquo;!&amp;lsquo;, 显示Er</description>
+    </item>
     
     <item>
       <title>Jupyter Notebook 快捷键</title>

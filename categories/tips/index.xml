@@ -6,10 +6,19 @@
     <description>Recent content in Tips on o0 原的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/tips/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vscode 快捷键</title>
+      <link>/post/vscode-shortcut/</link>
+      <pubDate>Sat, 09 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/vscode-shortcut/</guid>
+      <description>Vscode 快捷键 主命令行，打开命令面板: F1 / Ctrl + Shift + P 按BackSpace 进入 Ctrl+P 模式 Ctrl+P 导航，去往文件 &amp;rsquo;&amp;gt;&amp;rsquo; , 进入命令面板 文件名 &amp;rsquo;?&amp;lsquo;, 当前可执行操作 &amp;rsquo;!&amp;lsquo;, 显示Er</description>
+    </item>
     
     <item>
       <title>Jupyter Notebook 快捷键</title>
